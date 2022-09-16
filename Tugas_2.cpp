@@ -4,6 +4,12 @@
 #include <string.h>
 using namespace std;
 
+/*
+Author :
+By : RObby Ulung Pambudi
+NRP : 5025211042
+*/
+
 void PrintNumber(float **ar, int n, int m, float lastNumber[20])
 {
   float sum;
