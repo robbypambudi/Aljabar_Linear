@@ -1,18 +1,21 @@
 
 #include <iostream>
 #include <vector>
+#include <string.h>
 using namespace std;
 
-void PrintNumber(float **ar, int n, int m)
+void PrintNumber(float **ar, int n, int m, float lastNumber[20])
 {
   float sum;
+  int loop = 0;
   cout << "\n=== Nilai tiap variabel ===\n";
   for (int i = 0; i < n; i++)
   {
+    loop = 0;
     sum = 0;
     for (int j = n; j < m; j++)
     {
-      sum += ar[i][j];
+      sum += ar[i][j] * lastNumber[loop++];
     }
     cout << "Nilai X" << i << " : " << sum << endl;
   }
@@ -45,7 +48,7 @@ void PrintInverse(float **ar, int n, int m)
   return;
 }
 
-void InverseOfMatrix(float **matrix, int order)
+void InverseOfMatrix(float **matrix, int order, float lastMatrix[20])
 {
 
   float temp;
@@ -61,6 +64,10 @@ void InverseOfMatrix(float **matrix, int order)
 
       if (j == (i + order))
         matrix[i][j] = 1;
+      else if (j > order && j != (i + order))
+      {
+        matrix[i][j] = 0;
+      }
     }
   }
 
@@ -111,7 +118,7 @@ void InverseOfMatrix(float **matrix, int order)
   printf("\n=== Inverse Matrix ===\n");
   PrintInverse(matrix, order, 2 * order);
 
-  PrintNumber(matrix, order, 2 * order);
+  PrintNumber(matrix, order, 2 * order, lastMatrix);
 
   return;
 }
@@ -126,6 +133,9 @@ int main()
   int num;
   cout << "Masukan Jumlah Variabel (Jumlah variabel = Jumlah persamaan linear) : ";
   cin >> num;
+  cout.precision(2);
+  float lastMatrixs[20];
+  memset(lastMatrixs, 0, sizeof(lastMatrixs));
   for (int i = 0; i < num; i++)
   {
     cout << "Masukan Persamaan Linear " << i << "(Dalam bentuk matriks) : ";
@@ -133,9 +143,10 @@ int main()
     {
       cin >> matrix[i][j];
     }
+    cin >> lastMatrixs[i];
   }
   // Get the inverse of matrix
-  InverseOfMatrix(matrix, num);
+  InverseOfMatrix(matrix, num, lastMatrixs);
 
   system("pause");
 
