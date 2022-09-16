@@ -138,7 +138,7 @@ int main()
   memset(lastMatrixs, 0, sizeof(lastMatrixs));
   for (int i = 0; i < num; i++)
   {
-    cout << "Masukan Persamaan Linear " << i << "(Dalam bentuk matriks) : ";
+    cout << "Masukan Persamaan Linear " << i + 1 << " (Dalam bentuk matriks) : ";
     for (int j = 0; j < num; j++)
     {
       cin >> matrix[i][j];
